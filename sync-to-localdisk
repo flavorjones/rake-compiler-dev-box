@@ -10,8 +10,5 @@ cd $HOME
 projects="nokogiri"
 
 for project in $projects ; do
-    rsync --archive --verbose --delete \
-          --exclude=.git \
-          --exclude=tmp \
-           oss/${project} localdisk
+    rsync --archive --verbose --delete oss/${project} localdisk
 done
