@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+if [[ $HOSTNAME != "precise64" ]] ; then
+   echo "ERROR: This script should be run on the guest."
+   exit 1
+fi
+
+cd $HOME
+
+projects="nokogiri"
+
+for project in $projects ; do
+    rsync --archive --verbose --delete \
+          --exclude=.git \
+          --exclude=tmp \
+          --exclude=ports \
+           oss/${project} localdisk
+done
