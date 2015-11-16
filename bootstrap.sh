@@ -2,6 +2,13 @@
 
 set -e
 
+if [[ -a /proc/cpuinfo ]] ; then
+  export NUM_PROCESSORS=$(grep -c processor /proc/cpuinfo)
+else
+  export NUM_PROCESSORS=1
+fi
+export MAKEFLAGS=-j${NUM_PROCESSORS}
+
 as_vagrant='sudo -u vagrant -H bash -l -c'
 home='/home/vagrant'
 touch $home/.bash_profile
